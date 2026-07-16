@@ -19,7 +19,7 @@ export default async function handler(req, res) {
 
   try {
     const upstream = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${encodeURIComponent(voiceId)}?output_format=mp3_44100_128`,
+      `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}?output_format=mp3_44100_128`,
       {
         method: 'POST',
         headers: {
@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     if (!upstream.ok) {
       const detail = await upstream.text();
       console.error('ElevenLabs error:', upstream.status, detail);
-      return res.status(upstream.status).json({ error: 'ElevenLabs narration generation failed.' });
+      return res.status(upstream.status).json({ error: 'ElevenLabs narration generation failed.', detail });
     }
 
     const audio = Buffer.from(await upstream.arrayBuffer());
