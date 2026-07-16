@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     if (!upstream.ok) {
       const detail = await upstream.text();
       console.error('ElevenLabs error:', upstream.status, detail);
-      return res.status(upstream.status).json({ error: 'ElevenLabs narration generation failed.', detail });
+      return res.status(upstream.status).json({ error: 'ElevenLabs narration generation failed.' });
     }
 
     const audio = Buffer.from(await upstream.arrayBuffer());
