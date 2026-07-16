@@ -63,7 +63,7 @@ Evaluate this response against the command standard. Be specific about what they
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: process.env.ANTHROPIC_MODEL || 'claude-haiku-4-5-20251001',
         max_tokens: 1024,
         system: systemPrompt,
         messages: [{ role: 'user', content: userMessage }]
